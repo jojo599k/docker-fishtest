@@ -9,8 +9,9 @@ RUN apt-get update \
     python3-requests \
     git \
     build-essential \
-    && pip3 install updater \
     && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install updater \
     && git clone https://github.com/glinscott/fishtest.git /opt/fishtest
 
 ENV username=yourUsername password=yourPassword concurrency=1
