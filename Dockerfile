@@ -1,17 +1,11 @@
-FROM ubuntu:20.04
+FROM python:alpine
 
 LABEL maintainer="Johannes Schnepel"
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    python3 \
-    python3-pip \
-    python3-requests \
-    git \
-    build-essential \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip3 install updater \
+RUN apk update \
+    && apk add g++ make git \
+    && rm -rf /var/cache/apk/* \
+    && pip install requests updater \
     && git clone https://github.com/glinscott/fishtest.git /opt/fishtest
 
 ENV username=yourUsername password=yourPassword concurrency=1
