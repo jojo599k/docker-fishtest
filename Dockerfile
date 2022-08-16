@@ -1,9 +1,10 @@
-FROM --platform=linux/amd64 python:slim
+FROM --platform=linux/amd64 python:alpine
 
 LABEL maintainer="Johannes Schnepel"
 
-RUN apt-get update -y \
-    && apt-get install -y build-essential git libglib2.0.0 \
+RUN apk update \
+    && apk add g++ make git glib \
+    && rm -rf /var/cache/apk/* \
     && pip install requests updater \
     && git clone https://github.com/glinscott/fishtest.git /opt/fishtest
 
